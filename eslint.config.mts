@@ -4,8 +4,16 @@ import tseslint from 'typescript-eslint';
 import json from '@eslint/json';
 import { defineConfig, globalIgnores } from 'eslint/config';
 import angular from 'angular-eslint';
+import tailwindcss from 'eslint-plugin-tailwindcss';
 
 import { RulesConfig } from '@eslint/core';
+
+const tailwindRules: Partial<RulesConfig> = {
+  'tailwindcss/classnames-order': 'warn',
+  'tailwindcss/no-contradicting-classname': 'error',
+  'tailwindcss/no-custom-classname': 'off',
+  'tailwindcss/enforces-shorthand': 'warn',
+};
 
 const tsRules: Partial<RulesConfig> = {
   '@typescript-eslint/consistent-type-definitions': 'off',
@@ -57,6 +65,8 @@ export default defineConfig([
     files: ['**/*.ts'],
     plugins: {
       js,
+      // @ts-expect-error plugin exists and working
+      tailwindcss,
     },
     extends: [...tseslint.configs.strictTypeChecked, ...tseslint.configs.stylistic, ...angular.configs.tsRecommended],
     languageOptions: {
@@ -88,6 +98,7 @@ export default defineConfig([
       '@angular-eslint/relative-url-prefix': 'error',
       ...tsRules,
       ...jsRules,
+      ...tailwindRules,
     },
   },
   tseslint.configs.recommended,
@@ -108,9 +119,14 @@ export default defineConfig([
   {
     files: ['**/*.html'],
     extends: [...angular.configs.templateRecommended, ...angular.configs.templateAccessibility],
+    plugins: {
+      // @ts-expect-error plugin exists and working
+      tailwindcss,
+    },
     rules: {
       '@angular-eslint/template/click-events-have-key-events': 'off',
       '@angular-eslint/template/interactive-supports-focus': 'off',
+      ...tailwindRules,
     },
   },
   // =========================
