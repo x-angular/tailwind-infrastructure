@@ -12,40 +12,48 @@
     "prettier:format": "prettier --write .",
     "start": "ng serve",
     "test": "ng test",
-    "watch": "ng build --watch --configuration development"
+    "watch": "ng build --watch --configuration development",
+    "x-cli": "bun --tsconfig-override tsconfig.cmd.json cli/index.ts"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
-    "@angular/common": "^22.0.8",
-    "@angular/compiler": "^22.0.8",
-    "@angular/core": "^22.0.8",
-    "@angular/forms": "^22.0.8",
-    "@angular/platform-browser": "^22.0.8",
-    "@angular/router": "^22.0.8",
+    "@angular/common": "^22.2.1",
+    "@angular/compiler": "^22.2.1",
+    "@angular/core": "^22.2.1",
+    "@angular/forms": "^22.2.1",
+    "@angular/platform-browser": "^22.2.1",
+    "@angular/router": "^22.2.1",
     "rxjs": "~7.8.2",
     "tslib": "^2.8.1"
   },
   "devDependencies": {
-    "@angular/cli": "^22.0.8",
-    "@angular/compiler-cli": "^22.0.8",
-    "@commitlint/cli": "^21.2.1",
-    "@commitlint/config-conventional": "^21.2.0",
+    "@angular/cli": "^22.2.1",
+    "@angular/compiler-cli": "^22.2.1",
+    "@commitlint/cli": "^21.2.3",
+    "@commitlint/config-conventional": "^21.2.3",
     "@eslint/core": "^1.2.1",
     "@eslint/js": "^10.0.1",
-    "@eslint/json": "^2.0.1",
-    "@types/node": "^26.1.2",
-    "angular-eslint": "^22.1.0",
-    "eslint": "^10.8.0",
-    "globals": "^17.8.0",
+    "@eslint/json": "^2.1.0",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+    "@types/bun": "^1.4.2",
+    "@types/node": "^26.6.4",
+    "@types/prompts": "^2.4.9",
+    "angular-eslint": "^22.5.0",
+    "commander": "^15.0.0",
+    "eslint": "^10.12.0",
+    "globals": "^17.13.0",
     "husky": "^9.1.7",
     "jiti": "^2.7.0",
-    "lint-staged": "^17.2.0",
-    "prettier": "^3.9.6",
+    "lint-staged": "^17.6.0",
+    "prettier": "^3.9.9",
     "prettier-plugin-packagejson": "^3.0.2",
+    "prompts": "^2.4.2",
     "typescript": "~6.0.3",
-    "typescript-eslint": "^8.65.0"
+    "typescript-eslint": "^8.71.0"
   },
-  "packageManager": "pnpm@11.17.0"
+  "engines": {
+    "bun": ">=1.4.2"
+  }
 }
