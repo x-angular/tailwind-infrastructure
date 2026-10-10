@@ -2,10 +2,10 @@ import { RulesConfig } from '@eslint/core';
 import js from '@eslint/js';
 import json from '@eslint/json';
 import angular from 'angular-eslint';
+import tailwindcss from 'eslint-plugin-tailwindcss';
 import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
-import tailwindcss from 'eslint-plugin-tailwindcss';
 
 const tailwindRules: Partial<RulesConfig> = {
   'tailwindcss/classnames-order': 'warn',
