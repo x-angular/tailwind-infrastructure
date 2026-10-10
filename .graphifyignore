@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+.angular/
+
+# Test / coverage
+coverage/
+
+# Caches
+.cache/
+.nx/
+.turbo/
+
+# Git
+.git/
+
+# Graphify
+.graphify/
+graphify-out/
+
+# Optional: generated files
+tmp/
+temp/

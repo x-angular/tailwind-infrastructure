@@ -3,7 +3,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "types": ["node"]
+    "types": ["node", "bun"]
   },
-  "include": ["./eslint.config.mts"]
+  "include": ["./eslint.config.mts", "./cli/**/*.ts"]
 }

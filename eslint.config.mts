@@ -1,12 +1,11 @@
+import { RulesConfig } from '@eslint/core';
 import js from '@eslint/js';
+import json from '@eslint/json';
+import angular from 'angular-eslint';
+import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
-import json from '@eslint/json';
-import { defineConfig, globalIgnores } from 'eslint/config';
-import angular from 'angular-eslint';
 import tailwindcss from 'eslint-plugin-tailwindcss';
-
-import { RulesConfig } from '@eslint/core';
 
 const tailwindRules: Partial<RulesConfig> = {
   'tailwindcss/classnames-order': 'warn',
@@ -19,7 +18,18 @@ const tsRules: Partial<RulesConfig> = {
   '@typescript-eslint/consistent-type-definitions': 'off',
   '@typescript-eslint/explicit-function-return-type': ['error', { allowExpressions: true }],
   '@typescript-eslint/explicit-module-boundary-types': 'off',
-  '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+  '@typescript-eslint/no-unused-vars': [
+    'error',
+    {
+      args: 'all',
+      argsIgnorePattern: '^_',
+      caughtErrors: 'all',
+      caughtErrorsIgnorePattern: '^_',
+      destructuredArrayIgnorePattern: '^_',
+      varsIgnorePattern: '^_',
+      ignoreRestSiblings: true,
+    },
+  ],
   '@typescript-eslint/no-confusing-void-expression': 'off',
   '@typescript-eslint/no-empty-object-type': 'off',
   '@typescript-eslint/no-explicit-any': 'off',
@@ -57,9 +67,9 @@ const jsRules: Partial<RulesConfig> = {
   'spaced-comment': ['warn', 'always'],
 };
 export default defineConfig([
-  globalIgnores(['node_modules', 'dist', '.idea', '.git', '.angular', '.husky', 'AGENTS.md']),
+  globalIgnores(['node_modules', 'dist', '.idea', '.git', '.angular', '.vscode', '.codex', '.cursor', '.gemini', '.husky', '.graphify']),
   // =========================
-  // ANGULAR + TYPESCRIPT + INLINE TEMPLATE + TAILWIND
+  // ANGULAR + TYPESCRIPT + INLINE TEMPLATE + COMMANDS + TAILWIND
   // =========================
   {
     files: ['**/*.ts'],
@@ -101,6 +111,23 @@ export default defineConfig([
       ...tailwindRules,
     },
   },
+  {
+    files: ['cli/**/*.{js,mjs,cjs,ts,mts,cts}'],
+    plugins: { js },
+    extends: [...tseslint.configs.strictTypeChecked, ...tseslint.configs.stylistic],
+    languageOptions: {
+      globals: { ...globals.node },
+      parserOptions: {
+        project: 'tsconfig.cmd.json',
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+    rules: {
+      ...tsRules,
+      ...jsRules,
+      'no-console': 'off',
+    },
+  },
   tseslint.configs.recommended,
   // =========================
   // UNIT TESTS
@@ -125,6 +152,7 @@ export default defineConfig([
     },
     rules: {
       '@angular-eslint/template/click-events-have-key-events': 'off',
+      '@angular-eslint/template/label-has-associated-control': 'warn',
       '@angular-eslint/template/interactive-supports-focus': 'off',
       ...tailwindRules,
     },
